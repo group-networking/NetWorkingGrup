@@ -1,0 +1,52 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: white;
+  padding: 24px;
+  width: 340px;
+  border-radius: 10px;
+}
+
+.modal h2 {
+  margin-bottom: 16px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal .submit {
+  background: var(--primary);
+  color: rgb(0, 0, 0);
+  margin-top: 8px;
+}
+
+.modal .close {
+  background: transparent;
+  color: #555;
+  margin-top: 6px;
+}
+
+.modal p {
+  color: black;
+}

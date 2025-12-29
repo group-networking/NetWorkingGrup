@@ -1,0 +1,52 @@
+.navbar {
+  background: var(--primary);
+  color: rgb(0, 0, 0);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-buttons button {
+  background: transparent;
+  border: 1px solid white;
+  color: rgb(8, 8, 8);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.nav-buttons button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.profile-btn {
+  background: white;
+  color: var(--primary);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+
+  display: flex; /* ⬅️ ESSENCIAL */
+  align-items: center; /* ⬅️ ESSENCIAL */
+  justify-content: center; /* ⬅️ ESSENCIAL */
+
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  padding: 0; /* remove deslocamento */
+}
+
+.profile-btn:hover {
+  background: #e9d5ff;
+}
+
+.primary {
+  background-color: transparent;
+}
