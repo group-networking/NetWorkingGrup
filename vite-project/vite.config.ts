@@ -13,4 +13,19 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  build: {
+    // Do not generate source maps in production
+    sourcemap: false,
+    // Use terser to remove console/debugger and strip comments
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      format: {
+        comments: false,
+      },
+    },
+  },
 });

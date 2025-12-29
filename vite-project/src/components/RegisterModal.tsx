@@ -1,29 +1,31 @@
 import "./Modal.css";
+import { useLanguage } from "../contexts/LanguageContext";
 
 type Props = {
   onClose: () => void;
 };
 
 export default function RegisterModal({ onClose }: Props) {
+  const { t } = useLanguage();
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    alert("Registro enviado (front-end)");
   }
 
   return (
     <div className="modal-overlay">
       <form className="modal" onSubmit={handleSubmit}>
-        <h2>Registrar</h2>
+        <h2>{t.register.title}</h2>
 
-        <input placeholder="Nome" required />
-        <input placeholder="Email" required />
-        <input placeholder="Senha" type="password" required />
+        <input placeholder={t.register.name} required />
+        <input placeholder={t.register.email} required />
+        <input placeholder={t.register.password} type="password" required />
 
         <button className="submit" type="submit">
-          Criar conta
+          {t.register.submit}
         </button>
         <button type="button" className="close" onClick={onClose}>
-          Fechar
+          {t.register.close}
         </button>
       </form>
     </div>

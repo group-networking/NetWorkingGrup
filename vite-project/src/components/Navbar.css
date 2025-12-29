@@ -27,9 +27,9 @@
 }
 
 .profile-btn {
-  background: white;
+  background: transparent; /* permite que a imagem preencha todo o quadrado */
   color: var(--primary);
-  border-radius: 50%;
+  border-radius: 8px; /* quadrado com cantos arredondados */
   width: 36px;
   height: 36px;
 
@@ -41,12 +41,101 @@
   border: none;
   cursor: pointer;
   padding: 0; /* remove deslocamento */
-}
-
-.profile-btn:hover {
-  background: #e9d5ff;
+  overflow: hidden; /* garante que a imagem não vazará do contêiner */
+  background-size: cover; /* garante que a imagem de fundo preencha */
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .primary {
   background-color: transparent;
+}
+
+/* Hover sem apagar a imagem */
+.profile-btn:hover {
+  filter: brightness(0.9);
+  transform: scale(1.03);
+}
+
+.nav-buttons button:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* ===== BOTÃO DE PERFIL ===== */
+.profile-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none; /* remove borda que encolhe a imagem */
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+
+  display: flex;
+  align-items: stretch; /* 🔥 importante */
+  justify-content: stretch;
+
+  overflow: hidden;
+}
+
+/* IMAGEM DO PERFIL */
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.profile-btn img {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* SOBRESCREVE o padding global dos botões */
+.nav-buttons .profile-btn {
+  padding: 0 !important;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  box-sizing: border-box;
+}
+
+.profile-btn {
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+/* imagem ocupa tudo */
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Remove qualquer borda do botão de perfil */
+.nav-buttons .profile-btn {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Garante que a imagem não tenha borda */
+.profile-img {
+  border: none;
+}
+.profile-btn:focus,
+.profile-btn:active {
+  outline: none;
+  box-shadow: none;
 }

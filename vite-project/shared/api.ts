@@ -10,3 +10,12 @@
 export interface DemoResponse {
   message: string;
 }
+
+/**
+ * Projects
+ */
+export interface Project {
+  id: string;
+  name: string;
+  description?: string;
+}

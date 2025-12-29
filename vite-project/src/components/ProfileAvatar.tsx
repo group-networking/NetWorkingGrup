@@ -1,6 +1,15 @@
 import { useAuth } from "../contexts/AuthContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
-export default function ProfileAvatar() {
+type Props = {
+  showUpload?: boolean;
+  size?: string;
+};
+
+export default function ProfileAvatar({
+  showUpload = true,
+  size = "w-16 h-16",
+}: Props) {
   const { user, updateAvatar } = useAuth();
 
   function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
@@ -12,17 +21,33 @@ export default function ProfileAvatar() {
     reader.readAsDataURL(file);
   }
 
+  if (!showUpload) {
+    return (
+      <img
+        src={user?.avatar || "https://via.placeholder.com/80"}
+        className="rounded-md object-cover"
+        alt="Avatar"
+        style={{ width: "100%", height: "100%" }}
+      />
+    );
+  }
+
+  const { t } = useLanguage();
+
   return (
     <div className="flex items-center gap-3">
       <img
         src={user?.avatar || "https://via.placeholder.com/80"}
-        className="w-16 h-16 rounded-full object-cover border"
+        className={`${size} rounded-md object-cover`}
+        alt="Avatar"
       />
 
-      <label className="text-sm cursor-pointer text-purple-600">
-        Alterar foto
-        <input type="file" hidden accept="image/*" onChange={handleImage} />
-      </label>
+      {showUpload && (
+        <label className="text-sm cursor-pointer text-purple-600">
+          {t.settingsModal.changePhoto}
+          <input type="file" hidden accept="image/*" onChange={handleImage} />
+        </label>
+      )}
     </div>
   );
 }

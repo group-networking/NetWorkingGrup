@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { ProfileContext } from "../contexts/ProfileContext";
+import { useAuth } from "../contexts/AuthContext";
+import { useLanguage } from "../contexts/LanguageContext";
+import LanguageSelect from "./LanguageSelect";
 import "./Modal.css";
 
 type Props = {
@@ -9,34 +11,68 @@ type Props = {
 
 export default function SettingsModal({ onClose }: Props) {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const { photo, setPhoto } = useContext(ProfileContext);
+  const { user, updateAvatar } = useAuth();
+  const { t } = useLanguage();
 
-  function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = () => {
-      setPhoto(reader.result as string);
-    };
+    reader.onload = () => updateAvatar(reader.result as string);
     reader.readAsDataURL(file);
   }
 
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>Configurações</h2>
+        <h2>{t.settings}</h2>
 
-        <div className="color" style={{ marginBottom: "12px" }}>
-          <strong>Tema:</strong> {theme === "light" ? "Claro" : "Escuro"}
+        <div style={{ marginBottom: "12px" }}>
+          <strong>{t.settingsModal.themeLabel}</strong>{" "}
+          {theme === "light"
+            ? t.settingsModal.themeLight
+            : t.settingsModal.themeDark}
         </div>
 
         <button className="submit" onClick={toggleTheme}>
-          Alternar Tema
+          {t.settingsModal.toggleTheme}
         </button>
 
+        <div style={{ marginTop: 16 }}>
+          <strong>{t.settingsModal.languageLabel}</strong>
+          <div style={{ marginTop: 8 }}>
+            <LanguageSelect />
+          </div>
+        </div>
+
+        <div style={{ marginTop: 16 }}>
+          <strong>{t.settingsModal.profilePhoto}</strong>
+
+          <div style={{ marginTop: 8 }} className="profile-row">
+            <label className="text-sm cursor-pointer text-purple-600">
+              {t.settingsModal.changePhoto}
+              <input
+                type="file"
+                hidden
+                accept="image/*"
+                onChange={handleAvatarChange}
+              />
+            </label>
+
+            <img
+              src={user?.avatar || "https://via.placeholder.com/80"}
+              className="profile-image"
+              alt="Avatar"
+            />
+          </div>
+          <button type="button" id="logout" className="logout">
+            Sair da conta
+          </button>
+        </div>
+
         <button className="close" onClick={onClose}>
-          Fechar
+          {t.settingsModal.close}
         </button>
       </div>
     </div>

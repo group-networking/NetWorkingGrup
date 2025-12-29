@@ -1,10 +1,13 @@
 import "./Modal.css";
+import { useLanguage } from "../contexts/LanguageContext";
 
 type Props = {
   onClose: () => void;
 };
 
 export default function LoginModal({ onClose }: Props) {
+  const { t } = useLanguage();
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     alert("Login enviado (front-end)");
@@ -13,16 +16,16 @@ export default function LoginModal({ onClose }: Props) {
   return (
     <div className="modal-overlay">
       <form className="modal" onSubmit={handleSubmit}>
-        <h2>Entrar</h2>
+        <h2>{t.login.title}</h2>
 
-        <input placeholder="Email" required />
-        <input placeholder="Senha" type="password" required />
+        <input placeholder={t.login.email} required />
+        <input placeholder={t.login.password} type="password" required />
 
         <button className="submit" type="submit">
-          Entrar
+          {t.login.submit}
         </button>
         <button type="button" className="close" onClick={onClose}>
-          Fechar
+          {t.login.close}
         </button>
       </form>
     </div>

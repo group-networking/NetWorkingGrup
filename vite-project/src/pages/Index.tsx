@@ -19,7 +19,6 @@ export default function Index() {
         ) : (
           <>
             <div className="center-content">
-              <p>Faça login ou registre-se para começar.</p>
               <p className="mt-2 text-gray-600">
                 Explore conexões e conversas em tempo real.
               </p>

@@ -15,19 +15,37 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    try {
+      const saved = localStorage.getItem("auth_user");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
 
   function login(name: string) {
-    setUser({ name });
+    const next: User = { name };
+    setUser(next);
+    try {
+      localStorage.setItem("auth_user", JSON.stringify(next));
+    } catch {}
   }
 
   function logout() {
     setUser(null);
+    try {
+      localStorage.removeItem("auth_user");
+    } catch {}
   }
 
   function updateAvatar(avatar: string) {
-    if (!user) return;
-    setUser({ ...user, avatar });
+    // If there's no user, create a minimal guest user so avatar can be stored and shown in UI
+    const next = user ? { ...user, avatar } : { name: "Usuário", avatar };
+    setUser(next);
+    try {
+      localStorage.setItem("auth_user", JSON.stringify(next));
+    } catch {}
   }
 
   return (

@@ -13,10 +13,14 @@
   padding: 24px;
   width: 340px;
   border-radius: 10px;
+  /* Ensure text inside white modals is black */
+  color: #000;
 }
 
+/* Headings and common text in white modals should be black */
 .modal h2 {
   margin-bottom: 16px;
+  color: #000;
 }
 
 .modal input {
@@ -25,6 +29,17 @@
   margin-bottom: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  color: #000; /* input text color */
+}
+
+/* Make sure common inline elements inherit the black color */
+.modal p,
+.modal li,
+.modal span,
+.modal strong,
+.modal label,
+.modal a {
+  color: #000;
 }
 
 .modal button {
@@ -49,4 +64,25 @@
 
 .modal p {
   color: black;
+}
+
+/* Ensure modal content is left-aligned and provide a small profile preview layout */
+.modal {
+  text-align: left;
+}
+
+.modal .profile-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.modal .profile-row img,
+.profile-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px; /* quadrado arredondado */
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
 }
