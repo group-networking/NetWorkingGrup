@@ -42,6 +42,15 @@
   color: #000;
 }
 
+.modal .modal-link {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .modal button {
   width: 100%;
   padding: 10px;
@@ -54,6 +63,29 @@
   background: var(--primary);
   color: rgb(0, 0, 0);
   margin-top: 8px;
+}
+
+.modal .logout {
+  background: #ef4444; /* vermelho */
+  color: #fff;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.modal .logout svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.modal .logout:hover {
+  background: #dc2626; /* vermelho mais escuro no hover */
 }
 
 .modal .close {
@@ -85,4 +117,49 @@
   border-radius: 8px; /* quadrado arredondado */
   object-fit: cover;
   border: 1px solid #e5e7eb;
+}
+
+/* Confirmation modal styles */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+}
+
+.confirm-modal {
+  background: #fff;
+  padding: 20px;
+  width: 320px;
+  border-radius: 10px;
+  text-align: center;
+  color: #000;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.confirm-actions .submit.danger {
+  cursor: pointer;
+  background: #ef4444;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+}
+
+.confirm-actions .close {
+  cursor: pointer;
+  background: transparent;
+  color: #555;
+  padding: 8px 16px;
+  border: 1px solid #555;
+  border-radius: 6px;
 }

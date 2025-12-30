@@ -30,7 +30,6 @@ export default function ProjectsModal({ onClose }: { onClose: () => void }) {
     <div className="modal-overlay">
       <div className="modal">
         <h2>{t.projects.title}</h2>
-
         <button className="close" onClick={onClose}>
           {t.projects.close}
         </button>

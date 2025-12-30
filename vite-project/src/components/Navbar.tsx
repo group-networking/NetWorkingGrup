@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 import AboutModal from "./AboutModal";
@@ -9,6 +9,7 @@ import { useAuth } from "../contexts/AuthContext";
 import "./Navbar.css";
 
 import { useLanguage } from "../contexts/LanguageContext";
+import { ProfileContext } from "../contexts/ProfileContext";
 
 export default function Navbar() {
   const [login, setLogin] = useState(false);
@@ -18,21 +19,31 @@ export default function Navbar() {
   const [projects, setProjects] = useState(false);
   const { t } = useLanguage();
   const { user } = useAuth();
-  const avatarUrl = user?.avatar || "https://via.placeholder.com/80";
+  const { photo } = useContext(ProfileContext);
+  const avatarUrl = user?.avatar || photo || "https://via.placeholder.com/80";
 
   return (
     <>
       <nav className="navbar">
         <h1>NetWorking CodeFlow</h1>
 
+        <div className="procurar">
+          <input
+            type="search"
+            id="search"
+            className="inputprocurar"
+            placeholder=" Procurar"
+          ></input>
+          <button type="button" id="buttonsearch" className="buttonprocurar">
+            Procurar
+          </button>
+        </div>
+
         <div className="nav-buttons">
           <button className="sobre" onClick={() => setAbout(true)}>
             {t.navbar.about}
           </button>
           <button onClick={() => setLogin(true)}>{t.navbar.login}</button>
-          <button className="primary" onClick={() => setRegister(true)}>
-            {t.navbar.register}
-          </button>
 
           <button onClick={() => setProjects(true)}>{t.navbar.projects}</button>
 
@@ -48,8 +59,24 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {login && <LoginModal onClose={() => setLogin(false)} />}
-      {register && <RegisterModal onClose={() => setRegister(false)} />}
+      {login && (
+        <LoginModal
+          onClose={() => setLogin(false)}
+          onOpenRegister={() => {
+            setLogin(false);
+            setRegister(true);
+          }}
+        />
+      )}
+      {register && (
+        <RegisterModal
+          onClose={() => setRegister(false)}
+          onOpenLogin={() => {
+            setRegister(false);
+            setLogin(true);
+          }}
+        />
+      )}
       {about && <AboutModal onClose={() => setAbout(false)} />}
       {settings && <SettingsModal onClose={() => setSettings(false)} />}
       {projects && <ProjectsModal onClose={() => setProjects(false)} />}

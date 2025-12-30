@@ -3,9 +3,10 @@ import { useLanguage } from "../contexts/LanguageContext";
 
 type Props = {
   onClose: () => void;
+  onOpenRegister?: () => void;
 };
 
-export default function LoginModal({ onClose }: Props) {
+export default function LoginModal({ onClose, onOpenRegister }: Props) {
   const { t } = useLanguage();
 
   function handleSubmit(e: React.FormEvent) {
@@ -24,6 +25,17 @@ export default function LoginModal({ onClose }: Props) {
         <button className="submit" type="submit">
           {t.login.submit}
         </button>
+        <a
+          href="#"
+          className="modal-link"
+          onClick={(e) => {
+            e.preventDefault();
+            onOpenRegister?.();
+          }}
+        >
+          Não tem uma conta? Registre-se
+        </a>
+        <a href="#">Esqueceu a senha</a>
         <button type="button" className="close" onClick={onClose}>
           {t.login.close}
         </button>
