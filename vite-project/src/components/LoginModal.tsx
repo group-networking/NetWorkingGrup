@@ -34,7 +34,7 @@ export default function LoginModal({ onClose, onOpenRegister }: Props) {
           }}
         >
           Não tem uma conta? Registre-se
-        </a>
+        </a><br></br>
         <a href="#">Esqueceu a senha</a>
         <button type="button" className="close" onClick={onClose}>
           {t.login.close}
