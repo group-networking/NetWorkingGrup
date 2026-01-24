@@ -166,3 +166,45 @@
 input:hover {
   border: 1px solid black;
 }
+/* ===== BOTÃO DE UPLOAD (+) ===== */
+.upload-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+  border: 2px solid rgba(8, 8, 8, 0.3) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px;
+  color: rgb(8, 8, 8);
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  box-sizing: border-box;
+}
+
+.upload-btn:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-color: rgb(8, 8, 8) !important;
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.upload-btn:active {
+  transform: scale(0.95);
+}
+
+/* Garante cursor pointer */
+.upload-btn,
+.profile-btn {
+  cursor: pointer;
+}
+
+.upload-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}

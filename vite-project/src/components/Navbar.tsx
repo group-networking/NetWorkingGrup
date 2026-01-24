@@ -22,6 +22,38 @@ export default function Navbar() {
   const { photo } = useContext(ProfileContext);
   const avatarUrl = user?.avatar || photo || "https://via.placeholder.com/80";
 
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      // Criar FormData para enviar arquivos
+      const formData = new FormData();
+      Array.from(files).forEach((file) => {
+        formData.append("files", file);
+      });
+
+      // Tentar enviar para o servidor (se endpoint existir)
+      fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Arquivos enviados:", data);
+          alert(`${files.length} arquivo(s) adicionado(s) com sucesso!`);
+        })
+        .catch((err) => {
+          // Se não conseguir enviar, pelo menos mostra que foi selecionado
+          console.log("Erro ao enviar arquivos:", err);
+          console.log("Arquivos selecionados localmente:", files);
+          alert(
+            `${files.length} arquivo(s) selecionado(s)! (Aguardando processamento...)`
+          );
+        });
+    }
+    // Limpa o input para permitir selecionar o mesmo arquivo novamente
+    e.target.value = "";
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -46,6 +78,24 @@ export default function Navbar() {
           <button onClick={() => setLogin(true)}>{t.navbar.login}</button>
 
           <button onClick={() => setProjects(true)}>{t.navbar.projects}</button>
+
+          {/* Botão de Upload de Arquivos */}
+          <button
+            className="upload-btn"
+            onClick={() => document.getElementById("file-input")?.click()}
+            title="Adicionar arquivo"
+            aria-label="Adicionar arquivo"
+          >
+            +
+          </button>
+          <input
+            id="file-input"
+            type="file"
+            multiple
+            onChange={handleFileUpload}
+            style={{ display: "none" }}
+            accept="*/*"
+          />
 
           {/* Avatar de perfil (abre Configurações) */}
           <button

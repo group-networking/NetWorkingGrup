@@ -57,21 +57,29 @@ export default function SettingsModal({ onClose }: Props) {
           <strong>{t.settingsModal.profilePhoto}</strong>
 
           <div style={{ marginTop: 8 }} className="profile-row">
-            <label className="text-sm cursor-pointer text-purple-600">
-              {t.settingsModal.changePhoto}
-              <input
-                type="file"
-                hidden
-                accept="image/*"
-                onChange={handleAvatarChange}
+            <input
+              id="avatar-upload"
+              type="file"
+              hidden
+              accept="image/*"
+              onChange={handleAvatarChange}
+            />
+
+            <label htmlFor="avatar-upload" className="profile-photo-label">
+              <img
+                src={user?.avatar || "https://via.placeholder.com/80"}
+                className="profile-image"
+                alt="Avatar"
               />
+              <span className="upload-overlay">📷 Mudar foto</span>
             </label>
 
-            <img
-              src={user?.avatar || "https://via.placeholder.com/80"}
-              className="profile-image"
-              alt="Avatar"
-            />
+            <label
+              htmlFor="avatar-upload"
+              className="text-sm cursor-pointer text-purple-600 change-photo-text"
+            >
+              {t.settingsModal.changePhoto}
+            </label>
           </div>
           <button
             type="button"

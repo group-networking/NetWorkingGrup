@@ -1,9 +1,18 @@
+import { useState } from "react";
 import Navbar from "../components/Navbar";
+import PaymentModal from "../components/PaymentModal";
+import FreePlanModal from "../components/FreePlanModal";
 import { useAuth } from "../contexts/AuthContext";
 import "./Index.css";
 
 export default function Index() {
   const { user } = useAuth();
+  const [paymentModal, setPaymentModal] = useState<{
+    isOpen: boolean;
+    planName: string;
+    price: number;
+  }>({ isOpen: false, planName: "", price: 0 });
+  const [freePlanModal, setFreePlanModal] = useState(false);
 
   return (
     <>
@@ -34,10 +43,14 @@ export default function Index() {
                 </p>
                 <p className="text-gray-900 font-bold text-2xl">R$0/mês</p>
                 <ul className="mt-4 text-sm text-gray-600">
-                  <li>✓ Seguidores básicos</li>
-                  <li>✓ Suporte de segurança padrão</li>
+                  <li>✓ Seguidores básicos;</li>
+                  <li>✓ Suporte de segurança padrão.</li>
                 </ul>
-                <button id="btn-plano-gratis" className="btn-plano-gratis mt-6">
+                <button
+                  id="btn-plano-gratis"
+                  className="btn-plano-gratis mt-6"
+                  onClick={() => setFreePlanModal(true)}
+                >
                   Começar Agora
                 </button>
               </div>
@@ -51,11 +64,22 @@ export default function Index() {
                 </p>
                 <p className="font-bold text-2xl">R$19,99/mês</p>
                 <ul className="mt-4 text-sm">
-                  <li>✓ Seguidores de Confiança</li>
-                  <li>✓ Sem anúncios no site</li>
-                  <li>✓ Suporte de segurança avançado</li>
+                  <li>✓ Seguidores de Confiança;</li>
+                  <li>✓ Sem anúncios no site (se tiver);</li>
+                  <li>✓ Suporte de segurança avançado;</li>
+                  <li>✓ E muito mais!</li>
                 </ul>
-                <button id="btn-plano-premium" className="btn-plano-premium mt-6">
+                <button
+                  id="btn-plano-premium"
+                  className="btn-plano-premium mt-6"
+                  onClick={() =>
+                    setPaymentModal({
+                      isOpen: true,
+                      planName: "Premium",
+                      price: 19.99,
+                    })
+                  }
+                >
                   Assinar Agora
                 </button>
                 </div>
@@ -64,6 +88,20 @@ export default function Index() {
           </>
         )}
       </main>
+
+      <PaymentModal
+        isOpen={paymentModal.isOpen}
+        planName={paymentModal.planName}
+        price={paymentModal.price}
+        onClose={() =>
+          setPaymentModal({ isOpen: false, planName: "", price: 0 })
+        }
+      />
+
+      <FreePlanModal
+        isOpen={freePlanModal}
+        onClose={() => setFreePlanModal(false)}
+      />
     </>
   );
 }
