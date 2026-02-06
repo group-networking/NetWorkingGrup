@@ -1,4 +1,4 @@
--+import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Modal.css";
 import { useLanguage } from "../contexts/LanguageContext";
 
