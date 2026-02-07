@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Modal.css";
 import { useLanguage } from "../contexts/LanguageContext";
+import { FaDownload } from "react-icons/fa";
 
 type FileItem = {
   id: string;
@@ -8,6 +9,7 @@ type FileItem = {
   size?: number;
   preview?: string; // data-url para preview de imagem
   type?: string; // tipo MIME
+  data?: string; // data-url para o conteúdo do arquivo
 };
 
 type Project = {
@@ -69,45 +71,82 @@ export default function ProjectsModal({ onClose }: { onClose: () => void }) {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, projectId: string) => {
     const files = e.target.files;
-    
+
     if (!files || files.length === 0) return;
 
-    // Converter para array e adicionar
-    const newFiles = Array.from(files).map((file, idx) => ({
-      id: `${Date.now()}-${idx}`,
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      preview: undefined, // Sem preview por enquanto
-    }));
+    // Processar arquivos assincronamente
+    const processFiles = Array.from(files).map((file, idx) => {
+      return new Promise<FileItem>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const dataUrl = event.target?.result as string;
+          const isImage = file.type.startsWith('image/');
+          resolve({
+            id: `${Date.now()}-${idx}`,
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            preview: isImage ? dataUrl : undefined,
+            data: dataUrl,
+          });
+        };
+        reader.readAsDataURL(file);
+      });
+    });
 
-    // Atualizar estado imediatamente
-    setProjects(prevProjects => 
-      prevProjects.map(project =>
-        project.id === projectId
-          ? {
+    Promise.all(processFiles).then((newFiles) => {
+      // Atualizar estado imediatamente
+      setProjects(prevProjects =>
+        prevProjects.map(project =>
+          project.id === projectId
+            ? {
               ...project,
               files: [...(project.files || []), ...newFiles],
             }
-          : project
-      )
-    );
+            : project
+        )
+      );
 
-    // Mostrar alerta
-    alert(`${files.length} arquivo(s) adicionado(s) com sucesso!`);
-    
-    // Limpar input
-    e.target.value = "";
+      // Mostrar alerta
+      alert(`${files.length} arquivo(s) adicionado(s) com sucesso!`);
+
+      // Limpar input
+      e.target.value = "";
+    });
   };
 
   const handleDownloadFile = (file: FileItem) => {
-    alert(`Download: ${file.name}\n(Função de download será integrada com backend)`);
-    // TODO: Implementar download real quando tiver backend
+    if (!file.data) {
+      alert(`Erro: Dados do arquivo ${file.name} não encontrados.`);
+      return;
+    }
+
+    const link = document.createElement('a');
+    link.href = file.data;
+    link.download = file.name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleOpenFile = (file: FileItem) => {
-    alert(`Abrir: ${file.name}\n(Função de abrir será integrada com backend)`);
-    // TODO: Implementar abertura real quando tiver backend
+    if (!file.data) {
+      alert(`Erro: Dados do arquivo ${file.name} não encontrados.`);
+      return;
+    }
+
+    if (file.type?.startsWith('image/')) {
+      // Abrir imagem em nova aba
+      window.open(file.data, '_blank');
+    } else {
+      // Para outros tipos, fazer download
+      const link = document.createElement('a');
+      link.href = file.data;
+      link.download = file.name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   const handleDeleteFile = (projectId: string, fileId: string) => {
@@ -115,9 +154,9 @@ export default function ProjectsModal({ onClose }: { onClose: () => void }) {
       prevProjects.map(project =>
         project.id === projectId
           ? {
-              ...project,
-              files: project.files?.filter(f => f.id !== fileId) || [],
-            }
+            ...project,
+            files: project.files?.filter(f => f.id !== fileId) || [],
+          }
           : project
       )
     );
@@ -237,7 +276,7 @@ export default function ProjectsModal({ onClose }: { onClose: () => void }) {
                         <h3>{project.name}</h3>
                         {project.description && <p>{project.description}</p>}
                       </div>
-                      
+
                       <div className="project-actions">
                         <button
                           className="add-files-btn"
@@ -311,7 +350,7 @@ export default function ProjectsModal({ onClose }: { onClose: () => void }) {
                             onClick={() => handleDownloadFile(file)}
                             title="Download do arquivo"
                           >
-                            ⬇️
+                            <FaDownload />
                           </button>
                           <button
                             className="action-btn delete-btn"

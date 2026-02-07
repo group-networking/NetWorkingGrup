@@ -51,13 +51,17 @@
   cursor: pointer;
 }
 
-.modal button {
+.modal > button,
+.modal .submit,
+.modal .logout,
+.modal .close {
   width: 100%;
   padding: 10px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
 }
+
 
 .modal .submit {
   background: var(--primary);
@@ -643,4 +647,88 @@
   padding: 8px 16px;
   border: 1px solid #555;
   border-radius: 6px;
+}
+
+.action-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  color: #000 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+
+  min-width: 32px;
+  min-height: 32px;
+
+  overflow: visible !important;
+}
+
+.action-btn svg {
+  display: block !important;
+  width: 18px;
+  height: 18px;
+  color: inherit;
+}
+
+/* FORÇA visibilidade do conteúdo dos botões de ação */
+.action-btn,
+.action-btn * {
+  color: #111 !important;
+  fill: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Garante que SVG do react-icons apareça */
+.action-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block !important;
+}
+
+.file-actions button {
+  color: #000 !important;
+  font-size: 14px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.file-actions button * {
+  color: #000 !important;
+  fill: #000 !important;
+}
+
+.action-btn.download-btn::before {
+  content: "⬇";
+  font-size: 18px;
+  color: #92400e;
+  display: block;
+  line-height: 1;
+}
+
+.action-btn {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.action-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.action-btn.open-btn svg {
+  color: #0369a1;
+}
+.action-btn.download-btn svg {
+  color: #92400e;
+}
+.action-btn.delete-btn svg {
+  color: #b91c1c;
 }
