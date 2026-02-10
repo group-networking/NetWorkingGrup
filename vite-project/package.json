@@ -5,36 +5,25 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@tanstack/react-query": "^5.90.12",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.11.0",
+    "stripe": "^20.3.1"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
+    "@vitejs/plugin-react": "^4.2.0",
     "autoprefixer": "^10.4.23",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "vite": "^5.4.21"
-  },
-  "dependencies": {
-    "@tanstack/react-query": "^5.90.12",
-    "@vitejs/plugin-react": "^4.7.0",
-    "bcryptjs": "^3.0.3",
-    "cookie-parser": "^1.4.7",
-    "dotenv": "^17.2.4",
-    "ejs": "^4.0.1",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.2.1",
-    "express-session": "^1.19.0",
-    "express-validator": "^7.3.1",
-    "helmet": "^8.1.0",
-    "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.1.6",
-    "morgan": "^1.10.1",
-    "react-icon": "^1.0.0",
-    "react-icons": "^5.5.0",
-    "react-router-dom": "^7.11.0",
-    "stripe": "^20.3.1"
   },
   "main": "index.js",
   "author": "gabriel luiz",

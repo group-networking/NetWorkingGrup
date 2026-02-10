@@ -3,6 +3,9 @@ import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "url";
 import path from "path";
 
+// Get Vercel environment
+const isVercel = !!process.env.VERCEL;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
