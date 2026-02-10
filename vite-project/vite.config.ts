@@ -15,6 +15,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
+    base: process.env.VITE_SECRET_KEY || "/NetWorkingGrup/",
   },
   build: {
     // Do not generate source maps in production
