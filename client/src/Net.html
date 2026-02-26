@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net User</title>
+    <link rel="stylesheet" href="Net.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Net Admin</h2>
+        <ul>
+            <li><a href="#">Usuário</a></li>
+            <li><a href="#">Rede</a></li>
+            <li><a href="#">Segurança</a></li>
+            <li><a href="#">Logs</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+
+        <div class="netuser">
+            <h1>Net User</h1>
+            <span class="netuser-info">Informações do usuário da rede</span>
+            <ul class="netuser-list">
+                <li><strong>Nome de usuário:</strong> <span id="username">netuser</span></li>
+                <li><strong>Senha:</strong> <span id="password">********</span></li>
+                <li><strong>Grupo:</strong> Administradores</li>
+                <li><strong>Último login:</strong> <span id="lastLogin"></span></li>
+            </ul>
+        </div>
+
+        <div class="netuser-actions">
+            <button id="changePassword">Alterar Senha</button>
+            <button id="viewLogs">Ver Logs de Acesso</button>
+        </div>
+
+        <div class="net-container">
+            <h2>Configurações de Rede</h2>
+            <label>Endereço IP:</label>
+            <input type="text" id="ipAddress">
+
+            <label>Máscara:</label>
+            <input type="text" id="subnetMask">
+
+            <label>Gateway:</label>
+            <input type="text" id="gateway">
+
+            <button id="saveSettings">Salvar Configurações</button>
+        </div>
+
+        <div class="net-logs" style="display:none;">
+            <h2>Logs de Acesso</h2>
+            <ul id="accessLogs"></ul>
+        </div>
+
+        <div class="net-status">
+            <h2>Status da Rede</h2>
+            <p>Conexão: <span id="connectionStatus">Conectado</span></p>
+            <p>Velocidade: <span id="networkSpeed">100 Mbps</span></p>
+            <h3>Tráfego de Rede (Tempo Real)</h3>
+            <canvas id="networkChart"></canvas>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="Net.js"></script>
+</body>
+
+</html>

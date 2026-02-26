@@ -1,0 +1,140 @@
+.network-config {
+  background: #1b1f27;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  border-left: 4px solid #0078d4;
+}
+
+.network-config h2 {
+  font-size: 18px;
+  color: #60a5fa;
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #e2e8f0;
+  outline: none;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #e2e8f0;
+  outline: none;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  border-color: #0078d4;
+  box-shadow: 0 0 8px rgba(0, 120, 212, 0.3);
+}
+
+.form-group select:focus {
+  border-color: #0078d4;
+  box-shadow: 0 0 8px rgba(0, 120, 212, 0.3);
+}
+
+.form-group input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.advanced-section {
+  margin: 18px 0 10px;
+  padding-top: 12px;
+  border-top: 1px solid #334155;
+}
+
+.advanced-section h3 {
+  font-size: 15px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.static-group {
+  margin-top: 2px;
+}
+
+.checkbox-row {
+  margin: 8px 0 14px;
+}
+
+.checkbox-row label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.error-messages {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.error-messages .error {
+  color: #ef4444;
+  font-size: 14px;
+  margin: 0;
+}
+
+.success-message {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  color: #22c55e;
+  font-size: 14px;
+}
+
+.save-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.save-button:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
