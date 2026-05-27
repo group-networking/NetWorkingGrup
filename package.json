@@ -19,7 +19,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:gh-pages": "node deploy-gh-pages.mjs"
   },
   "dependencies": {
     "react": "^19.2.6",
